@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Examples</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+<div id="box">
+  <p v-html="name"></p>
+  <span>{{age}}</span>
+  <p v-if="isShow">我是动态创建和删除</p>
+  <p v-show="isShow">我是动态隐藏和显示</p>
+  <button v-on:click="handleClick">click</button>
+  <p v-bind:class="isShow?'aaa':'bbb'"></p>
+  <p>我是赵小狗{{changeword}}</p>
+  <p>我是赵土狗{{changewordMethod()}}</p>
+  <p class="default" :class="isShow?'aaaaaaaaa':'bbbbbbbbb'">class样式</p>
+  <p class="default" :class="{active:isShow}">class样式</p>
+  <p class="default" :class="{active:isShow,show:isShow2}">class样式——{}多个样式</p>
+  <p class="default" :class="['default','show']">class样式-数组样式</p>
+  <p class="default" :style="{background:color,fontsize:'30px'}">style样式</p>
+  <p class="default" :style="obj1">style样式-obj1</p>
+  <p class="default" :style="obj2">style样式-obj2</p>
+  <p class="default" :style="[obj1,obj2]">style样式-数组</p>
+</div>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#box",
+        data: {
+            name: "xiaoming",
+            age: 18,
+            isShow: false,
+            isShow2: true,
+            color: "red",
+            obj1: {background: "red"},
+            obj2: {fontSize: '40px'}
+        },
+        methods: {
+            handleClick: function () {
+                // console.log(11);
+                this.name = "aaaa";
+                this.isShow = "true";
+            },
+
+            changewordMethod: function () {
+                return this.name.substring(0, 1).toUpperCase() + this.name.substring(1)
+            }
+        },
+        computed: {
+            changeword: function () {
+                return this.name.substring(0, 1).toUpperCase() + this.name.substring(1)
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>
