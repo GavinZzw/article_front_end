@@ -1,7 +1,7 @@
 <template>
   <div style="height: 30px; line-height:30px">
     <router-link v-for="item in daohang2List" :key="item.id"
-                 :to="{path:'/article', query: {article_id:item.id}}">
+                 :to="{path:'/articleList', query: {articleType:item.id}}">
       <div class="dorpmenu"> {{item.name}}</div>
     </router-link>
 

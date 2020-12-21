@@ -1,7 +1,7 @@
 <template>
   <div>
     <top :daohang1List="daohang1List"></top>
-    <div style="text-align: center;line-height:80px;background: cornflowerblue;height: 80px;width: 100%;margin: 0 0">
+    <div style="text-align: center;line-height:80px;background: cornflowerblue;height: 80px;width: 999px;margin-left: 1px">
       banner
     </div>
     <end :daohang2List="daohang2List"></end>
@@ -39,7 +39,7 @@
             };
         },
         methods: {
-            async getArticleTypeData() {
+            async getArticleTypeFun() {
                 try {
                     const result = await getArticleType();
                     this.daohang1List = result.data.data.slice(0, 5);
@@ -52,7 +52,7 @@
 
         },
         mounted() {
-            this.getArticleTypeData()
+            this.getArticleTypeFun()
         }
     }
 </script>

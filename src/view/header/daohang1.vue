@@ -8,7 +8,7 @@
         </div>
       </router-link>
       <router-link v-for="item in daohang1List" :key="item.id"
-                   :to="{path:'/article', query: {article_id:item.id}}">
+                   :to="{path:'/articleList', query: {articleType:item.id}}">
         <div class="dorpmenu"> {{item.name}}</div>
       </router-link>
       <router-link :to="{path: '/'}">

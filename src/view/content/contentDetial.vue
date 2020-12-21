@@ -2,7 +2,9 @@
   <div>
 
     <div class="box">
-      <div class="a">A</div>
+      <div class="a">
+        <articleClass :articleTypeDetail="articleTypeDetail" :articleList="articleList"></articleClass>
+      </div>
       <div class="b">B</div>
       <div class="c">C</div>
     </div>
@@ -26,10 +28,38 @@
 </template>
 
 <script>
+    import articleClass from "./articleClass";
+    import {getArticle, getArticleTypeDetail} from "../../api/getData";
+
     export default {
+        components: {
+            articleClass
+        },
         name: "contentDetial",
         data() {
-            return {};
+            return {
+                articleTypeDetail: {},
+                articleList: []
+            }
+        },
+        methods: {
+            async getArticleTypeDetailFun1() {
+                try {
+                    const articleTypeInfo = await getArticleTypeDetail(6);
+                    console.log(articleTypeInfo)
+                    this.articleTypeDetail = articleTypeInfo.data.data[0];
+                    const articleInfo = await getArticle(this.articleTypeDetail['id'])
+                    this.articleList = articleInfo.data.data.results;
+                    console.log(articleInfo)
+                } catch (error) {
+                    console.log(error)
+                }
+
+            }
+
+        },
+        mounted() {
+            this.getArticleTypeDetailFun1()
         }
     }
 </script>
