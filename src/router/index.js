@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/view/home'
 import ArticleList from '@/view/ArticleList/ArticleList'
+import ArticleDetail from "../view/ArticleDetail/ArticleDetail";
 
 Vue.use(Router)
 
@@ -15,6 +16,10 @@ export default new Router({
     {
       path: '/articleList',
       component: ArticleList
+    },
+    {
+      path: '/articleDetail',
+      component: ArticleDetail
     },
     // {
     //   path: '/film',
@@ -42,8 +47,8 @@ export default new Router({
     //   component: Card
     // },
     {
-      path:"/",
-      redirect:"/home",
+      path: "/",
+      redirect: "/home",
     },
     // {
     //   path:'/detail/:xx',

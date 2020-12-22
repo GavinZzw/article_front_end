@@ -9,72 +9,43 @@
     <div style="clear: both">
       <Breadcrumb>
         <BreadcrumbItem to="/">首页</BreadcrumbItem>
-        <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+        <BreadcrumbItem>{{articleTypeDetail.name}}</BreadcrumbItem>
       </Breadcrumb>
     </div>
-    <List>
-      <ListItem>
-        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"
-                      title="This is title" description="This is description, this is description."/>
-      </ListItem>
-      <ListItem>
-        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"
-                      title="This is title" description="This is description, this is description."/>
-      </ListItem>
-      <ListItem>
-        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"
-                      title="This is title" description="This is description, this is description."/>
-      </ListItem>
-      <ListItem>
-        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"
-                      title="This is title" description="This is description, this is description."/>
-      </ListItem>
-      <ListItem>
-        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"
-                      title="This is title" description="This is description, this is description."/>
-      </ListItem>
-      <ListItem>
-        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"
-                      title="This is title" description="This is description, this is description."/>
-      </ListItem>
-      <ListItem>
-        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"
-                      title="This is title" description="This is description, this is description."/>
-      </ListItem>
-      <ListItem>
-        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"
-                      title="This is title" description="This is description, this is description."/>
-      </ListItem>
-      <ListItem>
-        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"
-                      title="This is title" description="This is description, this is description."/>
-        <!--        <template slot="action">-->
-        <!--          <li>-->
-        <!--            <a href="">Edit</a>-->
-        <!--          </li>-->
-        <!--          <li>-->
-        <!--            <a href="">More</a>-->
-        <!--          </li>-->
-        <!--        </template>-->
-      </ListItem>
-      <ListItem>
-        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"
-                      title="This is title" description="This is description, this is description."/>
-        <!--        <template slot="action">-->
-        <!--          <li>-->
-        <!--            <a href="">Edit</a>-->
-        <!--          </li>-->
-        <!--          <li>-->
-        <!--            <a href="">More</a>-->
-        <!--          </li>-->
-        <!--        </template>-->
-      </ListItem>
-    </List>
-    <div style="float: right">
-      <!--      <Page :total="40" size="small" />-->
-      <Page :total="40" size="small" show-elevator show-sizer/>
-      <!--      <Page :total="40" size="small" show-total />-->
+
+    <div>
+      <router-link v-for="item in articleList" :key="item.id"
+                   :to="{path:'/articleDetail', query: {article_id:item.id}}">
+        <div style="height: 50px">
+          <div style="float: left;width: 200px;font-size:20px;margin: 10px 0">
+            {{item.updated}}
+          </div>
+          <div style="float: right;width: 600px;font-size:16px;margin: 10px 0">
+            {{item.title}}
+            <!--          <br>-->
+            <!--          {{item.content}}-->
+          </div>
+        </div>
+      </router-link>
     </div>
+
+    <!--    <List>-->
+    <!--      -->
+    <!--      -->
+    <!--      <ListItem>-->
+    <!--        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"-->
+    <!--                      title="This is title" description="This is description, this is description."/>-->
+    <!--      </ListItem>-->
+
+    <!--    </List>-->
+    <div style="clear: both">
+      <div style="float: right">
+        <!--      <Page :total="40" size="small" />-->
+        <Page :total="articleList.length" size="small" show-elevator show-sizer/>
+        <!--      <Page :total="40" size="small" show-total />-->
+      </div>
+    </div>
+
     <div class="flex">
       <div>
         <p>免责声明</p>
@@ -90,6 +61,7 @@
 
 <script>
     import CommonHeader from "../../components/CommonHeader";
+    import {getArticle, getArticleTypeDetail} from "../../api/getData";
 
     export default {
 
@@ -98,10 +70,26 @@
 
         },
         data() {
-            return {};
+            return {
+                articleList: [],
+                articleTypeDetail: {}
+            };
+        },
+        methods: {
+            async getArticleTypeDetailFun(article_type) {
+                try {
+                    const articleTypeInfo = await getArticleTypeDetail("", article_type);
+                    this.articleTypeDetail = articleTypeInfo.data.data[0];
+                    const articleInfo = await getArticle(article_type)
+                    this.articleList = articleInfo.data.data;
+                } catch (error) {
+                    console.log(error)
+                }
+
+            }
         },
         mounted() {
-            console.log(this.$route.query.articleType)
+            this.getArticleTypeDetailFun(this.$route.query.articleType)
         }
     }
 </script>

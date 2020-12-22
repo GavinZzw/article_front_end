@@ -14,7 +14,7 @@
     <div style="width: 310px; height: 250px;margin: 0 10px;background:#ffffff">
 
       <router-link v-for="item in articleList" :key="item.id"
-                   :to="{path:'/article', query: {article_id:item.id}}">
+                   :to="{path:'/articleDetail', query: {article_id:item.id}}">
         <div style="height:30px;line-height:30px;border-bottom:1px dashed #000000;margin: 4px 4px">
           <!--          <div class="circle" style="float: left"></div>-->
           <div class="hoverALL" :title=item.title style="float: left;width: 220px">
