@@ -6,7 +6,7 @@
     <div style="clear: both">
       <router-view/>
     </div>
-    <div>Footer</div>
+<!--    <div>Footer</div>-->
     <!--    <Layout>-->
     <!--      <Header style="height: 100px; width:100%;background: none">-->
     <!--        <common-header></common-header>-->
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    
+
     import CommonHeader from "./components/CommonHeader";
 
     export default {

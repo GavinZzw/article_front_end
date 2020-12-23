@@ -62,5 +62,6 @@
     text-overflow: ellipsis; /*文字隐藏后添加省略号*/
     white-space: nowrap; /*强制不换行*/
     width: 10em; /*不允许出现半汉字截断*/
+    color: black;
   }
 </style>
