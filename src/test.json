@@ -1,0 +1,14 @@
+{
+    "data":[
+        {
+            "title":"xx论文",
+            "id":1,
+            "articleList":[
+                {
+                    "title":"xx论文2",
+                    "id":1
+                }
+            ]
+        }
+    ]
+}

@@ -1,61 +1,28 @@
 <template>
   <div class="layout" style="width: 1000px;margin: 0 auto">
-    <div>
-      <common-header></common-header>
-    </div>
-    <div style="text-align: center;line-height:80px;background: cornflowerblue;height: 80px;width: 100%;margin: 5px 0 ">
-      banner
-    </div>
-    <div style="clear: both">
-      <Breadcrumb>
-        <BreadcrumbItem to="/">首页</BreadcrumbItem>
-        <BreadcrumbItem>{{articleTypeDetail.name}}</BreadcrumbItem>
-      </Breadcrumb>
-    </div>
-
-    <div>
+    <div class="list">
       <router-link v-for="item in articleList" :key="item.id"
-                   :to="{path:'/articleDetail', query: {article_id:item.id}}">
-        <div style="height: 50px">
-          <div style="float: left;width: 200px;font-size:20px;margin: 10px 0">
-            {{item.updated}}
+                    :to="{path:'/articleDetail', query: {article_id:item.id}}">
+          <div style="margin-bottom:10px;padding:5px 0;border-bottom:1px solid #ccc;">
+            <div style="width: 200px;font-size:15px;margin: 10px 0;display:inline-block">
+              <p>{{item.updated}}</p>
+              <p class="nomoreFont">{{item.title}}</p>
+            </div>
+            <div class="nomoreFont" style="width: 600px;max-height:45px;font-size:16px;margin: 10px 0;display:inline-block">
+              <!-- {{item.content}} -->
+              这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容
+            </div>
           </div>
-          <div style="float: right;width: 600px;font-size:16px;margin: 10px 0">
-            {{item.title}}
-            <!--          <br>-->
-            <!--          {{item.content}}-->
-          </div>
-        </div>
-      </router-link>
+        </router-link>
+        <Page :total="articleList.length" size="small"
+          @onChange="pageChange"
+          :current="pageInfo.page"
+          @onPageSizeChange="onPageSizeChange"
+         show-elevator show-sizer show-total/>
     </div>
-
-    <!--    <List>-->
-    <!--      -->
-    <!--      -->
-    <!--      <ListItem>-->
-    <!--        <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar"-->
-    <!--                      title="This is title" description="This is description, this is description."/>-->
-    <!--      </ListItem>-->
-
-    <!--    </List>-->
-    <div style="clear: both">
-      <div style="float: right">
-        <!--      <Page :total="40" size="small" />-->
-        <Page :total="articleList.length" size="small" show-elevator show-sizer/>
-        <!--      <Page :total="40" size="small" show-total />-->
-      </div>
+    <div class="empty" style="font-size:20px;" v-if="articleList.length === 0">
+      暂无文章
     </div>
-
-    <div class="flex">
-      <div>
-        <p>免责声明</p>
-
-        <p>文章来源于网络、免费共享、仅供学习和研究，版权归原作者所有！</p>
-
-      </div>
-
-    </div>
-
   </div>
 </template>
 
@@ -72,16 +39,30 @@
         data() {
             return {
                 articleList: [],
-                articleTypeDetail: {}
+                articleTypeDetail: {},
+                pageInfo:{
+                  page:1,
+                  pageSize:10,
+                },
             };
         },
         methods: {
-            async getArticleTypeDetailFun(article_type) {
+            onPageSizeChange(size){
+              this.pageInfo.pageSize = size;
+              this.pageInfo.page = 1;
+              this.getArticleTypeDetailFun();
+            },
+            pageChange(page){
+              this.pageInfo.page = page;
+              this.getArticleTypeDetailFun();
+            },
+            async getArticleTypeDetailFun() {
+              const {articleType} = this.$route.query;
                 try {
-                    const articleTypeInfo = await getArticleTypeDetail("", article_type);
+                    const articleTypeInfo = await getArticleTypeDetail("", articleType,this.pageInfo);
                     this.articleTypeDetail = articleTypeInfo.data.data[0];
-                    const articleInfo = await getArticle(article_type)
-                    this.articleList = articleInfo.data.data;
+                    const articleInfo = await getArticle(articleType)
+                    this.articleList = articleInfo.data.data.results;
                 } catch (error) {
                     console.log(error)
                 }
@@ -89,8 +70,16 @@
             }
         },
         mounted() {
-            this.getArticleTypeDetailFun(this.$route.query.articleType)
-        }
+            this.getArticleTypeDetailFun()
+        },
+        watch:{
+          $route:{
+            deep:true,
+            handler(n){
+              this.getArticleTypeDetailFun()
+            }
+          },
+        },
     }
 </script>
 
@@ -109,5 +98,10 @@
     background: darkgray;
     margin: 0 auto;
     color: #fff;
+  }
+  .nomoreFont{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
   }
 </style>

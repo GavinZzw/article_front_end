@@ -2,10 +2,10 @@
   <div>
     <div style="width: 310px; height: 30px;margin: 0 10px">
       <div style="float: left;height:100%;line-height:30px;color: white;font-size: 16px;font-weight: bold">
-        {{articleTypeDetail.name}}
+        {{info.name}}
       </div>
 
-      <router-link :to="{path: '/articleList', query: {articleType:articleTypeDetail.id}}">
+      <router-link :to="{path: '/articleList', query: {articleType:info.id}}">
         <div style="float: right;height:100%;line-height:30px;color: white;font-size: 12px;font-weight: bold">
           查看更多>>
         </div>
@@ -13,16 +13,13 @@
     </div>
     <div style="width: 310px; height: 250px;margin: 0 10px;background:#ffffff">
 
-      <router-link v-for="item in articleList" :key="item.id"
-                   :to="{path:'/articleDetail', query: {article_id:item.id}}">
+      <router-link v-for="item in info.articles" :key="item.id" :to="{path:'/articleDetail', query: {article_id:item.id}}">
         <div style="height:30px;line-height:30px;border-bottom:1px dashed #000000;margin: 4px 4px">
-          <!--          <div class="circle" style="float: left"></div>-->
           <div class="hoverALL" :title=item.title style="float: left;width: 220px">
             <div class="circle"></div>
             {{item.title}}
           </div>
-          <div style="float: right">[{{item.updated}}]</div>
-
+          <!-- <div style="float: right">[{{item.updated}}]</div> -->
         </div>
       </router-link>
 
@@ -34,14 +31,14 @@
     export default {
         name: "articleClass",
         props: {
-            articleTypeDetail: {
+            info: {
                 type: Object,
                 required: true
             },
-            articleList: {
-                type: Array,
-                required: true
-            }
+        },
+        watch:{
+          articleTypeDetail(){
+          },
         },
         data() {
             return {};

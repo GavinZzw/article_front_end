@@ -29,7 +29,11 @@
                 required: true
             }
         },
-
+        // watch:{
+        //   daohang1List(){
+        //     console.log(this.daohang1List)
+        //   },
+        // },
         data() {
             return {};
         }
