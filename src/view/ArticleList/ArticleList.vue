@@ -1,7 +1,7 @@
 <template>
   <div class="layout" style="width: 1000px;margin: 0 auto">
     <div style="text-align: center;line-height:80px;background: cornflowerblue;height: 80px;width: 100%;margin: 5px 0">
-      banner
+      banner4
     </div>
     <div style="clear: both">
       <Breadcrumb>
@@ -27,7 +27,7 @@
             <div class="nomoreFont" style="line-height: 40px;height: 40px;float: bottom;font-size: 16px;color: black">
               <p>{{item.title}}</p>
             </div>
-            <div style="line-height: 20px;height: 20px;float: bottom;color: #cccccc;font-size: 14px;">
+            <div style="line-height: 20px;height: 20px;float: bottom;color: #cccccc;font-size: 14px;overflow: hidden">
               <p>{{item.summary}}</p>
             </div>
           </div>

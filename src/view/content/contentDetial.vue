@@ -4,13 +4,13 @@
       <articleClass :info="item" :key="item.id"></articleClass>
       </div>
     <div style="text-align: center;line-height:80px;background: cornflowerblue;height: 80px;width: 100%;margin: 5px 0 ">
-      banner
+      banner2
     </div>
     <div class="a" v-for="(item,index) in listB" :key="item.id" :class="{'noMargin':(index+1)%3===0}">
         <articleClass :info="item" :key="item.id"></articleClass>
       </div>
     <div style="text-align: center;line-height:80px;background: cornflowerblue;height: 80px;width: 100%;margin: 5px 0">
-      banner
+      banner3
     </div>
   </div>
 </template>
@@ -31,7 +31,7 @@
             }
         },
         methods: {
-          
+
         },
         created(){
           getHomeData().then(res=>{

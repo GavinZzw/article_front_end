@@ -7,6 +7,8 @@ const service = axios.create({
 
 //文章类别列表接口
 export const getArticleType = () => service.get("/articleType");
+
+
 export const getHomeData = () => service.get("/articleType/show?ids=4,7,8,9,10,13,14,15,16");
 
 //获取指定priority/id的文章分类详情

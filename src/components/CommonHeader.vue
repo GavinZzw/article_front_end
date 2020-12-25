@@ -2,7 +2,7 @@
   <div>
     <top :daohang1List="daohang1List"></top>
     <div style="text-align: center;line-height:80px;background: cornflowerblue;height: 80px;width: 999px;margin-left: 1px">
-      banner
+      banner1
     </div>
     <end :daohang2List="daohang2List"></end>
     <div style="clear:both;height:32px;line-height:32px;font-size: 14px;font-weight: bold;">
@@ -43,7 +43,7 @@
                 try {
                     const result = await getArticleType();
                     this.daohang1List = result.data.data.slice(0, 5);
-                    this.daohang2List = result.data.data.slice(5, 50);
+                    this.daohang2List = result.data.data.slice(5, 55);
                 } catch (error) {
                     console.log(error)
                 }
