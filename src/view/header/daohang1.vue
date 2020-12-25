@@ -1,6 +1,6 @@
 <template>
   <div style="height: 29px; line-height:29px">
-    <div style="float:left;font-size: 14px;font-weight: bold">你好，欢迎来到论文网</div>
+    <div style="float:left;font-size: 14px;font-weight: bold">你好，欢迎来到588论文网</div>
     <div style="float:right;width:700px;height:29px">
       <router-link :to="{path: '/'}">
         <div class="dorpmenu">

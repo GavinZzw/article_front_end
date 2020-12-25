@@ -11,7 +11,7 @@
       </div>
       <div style="float:right ;height:32px; width:970px">
         <marquee direction="left" scrollamount="5" behavior="scroll"  onmouseover="stop()" onmouseout="start()">
-          欢迎来到985论文网，本站提供硕博论文、研究生论文、专本论文、毕业论文、职称论文及期刊论文等服务，详情请咨询在线老师。
+          欢迎来到588论文网，本站提供硕博论文、研究生论文、专本论文、毕业论文、职称论文及期刊论文等服务，详情请咨询在线老师。
         </marquee>
       </div>
 
