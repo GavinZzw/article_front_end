@@ -28,6 +28,7 @@
     float: left;
     width: 99px;
     margin-left: 1px;
+    margin-bottom: 1px;
     background: #79cae5;
     color: white;
     text-align: center;
